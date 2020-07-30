@@ -1,5 +1,6 @@
 package com.cristianregnier.accountingnotebook.api;
 
+import com.cristianregnier.accountingnotebook.api.exception.NotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,12 @@ import java.util.Map;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+   @ExceptionHandler(NotFoundException.class)
+   protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex)
+           throws JsonProcessingException {
+      return buildResponse(HttpStatus.NOT_FOUND, ex);
+   }
 
    @ExceptionHandler(IllegalArgumentException.class)
    protected ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException ex)

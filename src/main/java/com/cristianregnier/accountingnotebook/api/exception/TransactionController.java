@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/transactions")
@@ -35,5 +36,18 @@ public class TransactionController {
          throw new IllegalArgumentException("Unssuported operation: " + commitTransaction.getType().name());
 
       return newTransaction;
+   }
+
+   @GetMapping("/{id}")
+   public Transaction findTransactionById(@PathVariable String id) {
+      List<Transaction> transactions =
+              accounts.getAccount().getHistory().stream().filter(trx -> {
+                 return id.equals(trx.getId());
+              }).collect(Collectors.toList());
+
+      if(transactions.isEmpty())
+         throw new NotFoundException("transaction not found");
+      else
+         return transactions.get(0);
    }
 }
