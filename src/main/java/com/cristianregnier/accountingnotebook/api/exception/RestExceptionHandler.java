@@ -1,6 +1,6 @@
-package com.cristianregnier.accountingnotebook.api;
+package com.cristianregnier.accountingnotebook.api.exception;
 
-import com.cristianregnier.accountingnotebook.api.exception.NotFoundException;
+import com.cristianregnier.accountingnotebook.exception.NotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
