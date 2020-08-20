@@ -14,7 +14,9 @@ public final class Account {
    private List<Transaction> history;
 
    public Account(BigDecimal balance) {
-      if (balance.compareTo(BigDecimal.ZERO) < 1)
+      if (balance == null)
+         throw new IllegalArgumentException("Initial balance is required.");
+      if (balance.compareTo(BigDecimal.ZERO) < 0)
          throw new IllegalArgumentException("Initial balance must be positive.");
 
       this.balance = balance;
