@@ -2,6 +2,7 @@ package com.cristianregnier.accountingnotebook.model;
 
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -11,10 +12,10 @@ public class Transaction {
 
    private String id;
    private Type type;
-   private Double amount;
+   private BigDecimal amount;
    private Date effectiveDate;
 
-   public Transaction(String id, Type type, Double amount, Date effectiveDate) {
+   public Transaction(String id, Type type, BigDecimal amount, Date effectiveDate) {
       if (id == null || id.isEmpty())
          throw new IllegalArgumentException("Id id required");
       if (type == null)

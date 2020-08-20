@@ -8,6 +8,7 @@ import com.cristianregnier.accountingnotebook.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -33,7 +34,7 @@ public class AccountManager {
    @Autowired
    private AccountRepository accounts;
 
-   public Double getAccountBalance() {
+   public BigDecimal getAccountBalance() {
       try {
          readLock.lock();
          return accounts.getAccount().getBalance();
@@ -41,7 +42,6 @@ public class AccountManager {
          readLock.unlock();
       }
    }
-
 
    public Transaction commitTransaction(CommitTransactionCommand commitTransaction) {
       try {
